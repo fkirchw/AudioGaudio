@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float PlayerVelocity = 2;
-    public Vector2 moveDir = Vector2.zero;
+    private Vector2 moveDir = Vector2.zero;
     public Rigidbody2D rigidBody;
     private readonly HashSet<Vector2> contacts = new HashSet<Vector2>();
     void Start()
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            rigidBody.velocity = moveDir * PlayerVelocity*3;
+            rigidBody.velocity = 3 * PlayerVelocity * moveDir;
         }
         else
         {

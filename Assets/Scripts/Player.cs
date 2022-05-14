@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public float PlayerVelocity = 2;
     private Vector2 moveDir = Vector2.zero;
     public Rigidbody2D rigidBody;
-    private readonly HashSet<Vector2> contacts = new HashSet<Vector2>();
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -52,6 +51,5 @@ public class Player : MonoBehaviour
         {
             rigidBody.velocity = moveDir * PlayerVelocity;
         }
-        
     }
 }

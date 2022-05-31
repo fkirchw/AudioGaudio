@@ -46,10 +46,9 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             rigidBody.velocity = 3 * PlayerVelocity * moveDir;
-        }
-        else
-        {
-            rigidBody.velocity = moveDir * PlayerVelocity;
+        }else{
+            rigidBody.velocity = PlayerVelocity * moveDir;
         }
     }
+   
 }

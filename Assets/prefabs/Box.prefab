@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8686799436533141901}
   m_Layer: 0
   m_Name: CheckLeft
-  m_TagString: Player
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0935234b97c4834688d16c9cb4044e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 5895920518791471543, guid: d0849d6c63c000048ba245c3c2bf164b, type: 3}
   pullDetectLeft: {fileID: 8686799436533141901}
   pullDetectRight: {fileID: 8686799437510343995}
   rayDist: 0.1
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 8686799437510343995}
   m_Layer: 0
   m_Name: CheckRight
-  m_TagString: Player
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

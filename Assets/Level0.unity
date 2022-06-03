@@ -460,6 +460,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 180396574885884892, guid: 3984c2aa3a3e0b64ab4019c7ffbad95d,
+        type: 3}
+      propertyPath: rigidBody
+      value: 
+      objectReference: {fileID: 1409839195}
     - target: {fileID: 180396574885884895, guid: 3984c2aa3a3e0b64ab4019c7ffbad95d,
         type: 3}
       propertyPath: m_Name
@@ -467,6 +472,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3984c2aa3a3e0b64ab4019c7ffbad95d, type: 3}
+--- !u!4 &1409839193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 180396574885884890, guid: 3984c2aa3a3e0b64ab4019c7ffbad95d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1409839192}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1409839195 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 180396574885884891, guid: 3984c2aa3a3e0b64ab4019c7ffbad95d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1409839192}
+  m_PrefabAsset: {fileID: 0}
 --- !u!850595691 &1474549851
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -536,6 +553,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1073731569047865314, guid: e79cd48d641ebe043b91c6a73e60ee84,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1409839193}
     - target: {fileID: 6490244163835554672, guid: e79cd48d641ebe043b91c6a73e60ee84,
         type: 3}
       propertyPath: frequency1
@@ -559,12 +581,12 @@ PrefabInstance:
     - target: {fileID: 8686799436956973316, guid: e79cd48d641ebe043b91c6a73e60ee84,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.64
+      value: 5.89
       objectReference: {fileID: 0}
     - target: {fileID: 8686799436956973316, guid: e79cd48d641ebe043b91c6a73e60ee84,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.72
+      value: 2.86
       objectReference: {fileID: 0}
     - target: {fileID: 8686799436956973316, guid: e79cd48d641ebe043b91c6a73e60ee84,
         type: 3}
@@ -696,6 +718,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1073731569047865314, guid: e79cd48d641ebe043b91c6a73e60ee84,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1409839193}
     - target: {fileID: 6490244163835554672, guid: e79cd48d641ebe043b91c6a73e60ee84,
         type: 3}
       propertyPath: frequency1
@@ -771,7 +798,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Box
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 248147983345165332, guid: e79cd48d641ebe043b91c6a73e60ee84, type: 3}
+    - {fileID: 6233151276666938124, guid: e79cd48d641ebe043b91c6a73e60ee84, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e79cd48d641ebe043b91c6a73e60ee84, type: 3}
 --- !u!1001 &451447784532112491
 PrefabInstance:

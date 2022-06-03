@@ -449,6 +449,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1073731569047865314, guid: e79cd48d641ebe043b91c6a73e60ee84,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1127182700}
     - target: {fileID: 6490244163835554672, guid: e79cd48d641ebe043b91c6a73e60ee84,
         type: 3}
       propertyPath: frequency1
@@ -544,6 +549,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6589c442c6d2c1b40ac30897f2e30b13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1127182700 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 180396574885884890, guid: 3984c2aa3a3e0b64ab4019c7ffbad95d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2107861748}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1483557721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -773,6 +784,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1073731569047865314, guid: e79cd48d641ebe043b91c6a73e60ee84,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1127182700}
     - target: {fileID: 6490244163835554672, guid: e79cd48d641ebe043b91c6a73e60ee84,
         type: 3}
       propertyPath: frequency1
@@ -926,6 +942,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1073731569047865314, guid: e79cd48d641ebe043b91c6a73e60ee84,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1127182700}
     - target: {fileID: 6490244163835554672, guid: e79cd48d641ebe043b91c6a73e60ee84,
         type: 3}
       propertyPath: frequency1

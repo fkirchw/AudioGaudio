@@ -184,9 +184,9 @@ MonoBehaviour:
   target: {fileID: 0}
   pullDetectLeft: {fileID: 8686799436533141901}
   pullDetectRight: {fileID: 8686799437510343995}
-  rayDist: 0
+  rayDist: 0.1
   offset: {x: 0, y: 0, z: 0}
-  damping: 0
+  damping: 0.0000001
 --- !u!1 &8686799437510343996
 GameObject:
   m_ObjectHideFlags: 0

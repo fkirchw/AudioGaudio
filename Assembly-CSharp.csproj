@@ -57,13 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AudioGaudioListener.cs" />
+    <Compile Include="Assets\Scripts\Winstate.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Pull.cs" />
     <Compile Include="Assets\Scripts\VALUES.cs" />
     <Compile Include="Assets\Scripts\Dragable.cs" />
     <Compile Include="Assets\Scripts\SineWaveGenerator.cs" />
     <Compile Include="Assets\Scripts\Graph.cs" />
-    <Compile Include="Assets\Scripts\Winstate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\WinStates\Test.txt" />

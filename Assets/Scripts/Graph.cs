@@ -17,17 +17,18 @@ public class Graph : MonoBehaviour
     private static int nextWindowId = 0;
     private int WindowId { get; set; }
 
-    // A list of random values to draw
-    private List<float> values = new List<float>();
+    private float[] values = new float[VALUES.sampleSize];
 
     // The list the drawing function uses...
-    private List<float> drawValues = new List<float>();
+    private float[] drawValues = new float[VALUES.sampleSize];
+
+
 
     // List of Windows
     public bool showWindow0 = false;
 
     public int sourceAmount = 1;
-    public bool listener;
+    private bool listener = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,21 +39,18 @@ public class Graph : MonoBehaviour
 
     public void SetValues(float[] newValues)
     {
-        values.Clear();
-        values.AddRange(newValues);
+        drawValues = newValues;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SetWinValues(float[] newValues)
     {
+        listener = true;
+        values = newValues;
     }
-
     private void OnGUI()
     {
         if (showWindow0)
         {
             // Set out drawValue list equal to the values list 
-            drawValues = values;
             windowRect = GUI.Window(WindowId, windowRect, DrawGraph, "");
         }
     }
@@ -100,6 +98,29 @@ public class Graph : MonoBehaviour
                 valueIndex -= 1;
             }
             GL.End();
+
+            if (listener)
+            {
+                GL.Begin(GL.LINES);
+                GL.Color(Color.red);
+
+                valueIndex = VALUES.sampleSize - 1;
+                for (int i = (int)windowRect.width - 4; i > 3; i--)
+                {
+                    float y1 = 0;
+                    float y2 = 0;
+                    if (valueIndex > 0)
+                    {
+                        y2 = (values[valueIndex] * windowRect.height / 2);
+                        y1 = (values[valueIndex - 1] * windowRect.height / 2);
+                    }
+
+                    GL.Vertex3(i, windowRect.height / 2 + y2, 0);
+                    GL.Vertex3((i - 1), windowRect.height / 2 + y1, 0);
+                    valueIndex -= 1;
+                }
+                GL.End();
+            }
 
             GL.PopMatrix();
         }

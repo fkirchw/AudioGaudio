@@ -1,20 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioListener))]
 public class AudioGaudioListener : MonoBehaviour
 {
     private Graph graph;
-    private AudioListener audioListener;
-    public int channel;
     private SineWaveGenerator[] generators;
+    private SpriteRenderer spriteRenderer;
+    private float[] winArray = new float[1024];
+    public string WinstateName;
+    public string NextLevelName;
+    public float delta = 0.001f;
 
     void Start()
     {
         graph = this.GetComponentInChildren<Graph>();
         generators = Object.FindObjectsOfType<SineWaveGenerator>();
+        try
+        {
+            winArray = JsonUtility.FromJson<Winstate>(File.ReadAllText(WinstateName)).farr;
+            if(winArray == null)
+            {
+                winArray = new float[] {float.MaxValue, float.MinValue};
+            }
+            else
+            {
+                graph.SetWinValues(winArray);
+                Debug.Log("Write");
+            }
+
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogException(ex);
+        }
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -23,7 +48,7 @@ public class AudioGaudioListener : MonoBehaviour
         foreach (SineWaveGenerator gen in generators)
         {
             NavMeshPath path = new NavMeshPath();
-            bool hasPath = NavMesh.CalculatePath(transform.position, gen.transform.position, NavMesh.AllAreas, path);
+            bool hasPath = NavMesh.CalculatePath(transform.position, gen.transform.parent.position, NavMesh.AllAreas, path);
             if (!hasPath || path.status != NavMeshPathStatus.PathComplete)
             {
                 gen.currentAmplitude = 0;
@@ -45,11 +70,37 @@ public class AudioGaudioListener : MonoBehaviour
             }
         }
 
+
+        float[] currentFarr = new float[VALUES.sampleSize];
+        AudioListener.GetOutputData(currentFarr, 0);
+
         if (graph.showWindow0)
         {
-            float[] farr = new float[VALUES.sampleSize];
-            AudioListener.GetOutputData(farr, channel);
-            graph.SetValues(farr);
+            if (Input.GetKeyDown(KeyCode.KeypadMinus))
+            {
+                File.WriteAllText(WinstateName, JsonUtility.ToJson(new Winstate { farr = currentFarr }));
+                Debug.Log("Write");
+            }
+            graph.SetValues(currentFarr);
+        }
+
+        bool won = true;
+        for (int i = 0; i < winArray.Length; i += 10)
+        {
+            if (Mathf.Abs(winArray[i] - currentFarr[i]) > delta)
+            {
+                won = false;
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) || won)
+        {
+            spriteRenderer.color = Color.green;
+            SceneManager.LoadScene(NextLevelName, LoadSceneMode.Single);
+        }
+        else
+        {
+            spriteRenderer.color = Color.red;
         }
     }
 
@@ -64,27 +115,9 @@ public class AudioGaudioListener : MonoBehaviour
 
         return total;
     }
-    public static void DebugDrawPath(Vector3[] corners)
+
+    void OnMouseDown()
     {
-        if (corners.Length < 2) { return; }
-        int i = 0;
-
-        for (; i < corners.Length - 1; i++)
-        {
-            Debug.DrawLine(new Vector3(corners[i].x, corners[i].y, 0), new Vector3(corners[i + 1].x, corners[i + 1].y, 0), Color.blue);
-        }
-
-        Debug.DrawLine(new Vector3(corners[0].x, corners[0].y, 0), new Vector3(corners[1].x, corners[1].y, 0), Color.red);
-    }
-
-
-    private void OnMouseOver()
-    {
-        graph.showWindow0 = true;
-    }
-
-    private void OnMouseExit()
-    {
-        graph.showWindow0 = false;
+        graph.showWindow0 = !graph.showWindow0;
     }
 }

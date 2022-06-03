@@ -49,7 +49,7 @@ public class SineWaveGenerator : MonoBehaviour
         }
     }
 
-    void Update()
+    void Update() 
     {
         if (graph.showWindow0)
         {

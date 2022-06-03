@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Draws a basic oscilloscope type graph in a GUI.Window()
@@ -12,7 +13,9 @@ public class Graph : MonoBehaviour
 {
 
     Material mat;
-    private Rect windowRect = new Rect(20, 20, 512*2, 256);
+    private Rect windowRect = new Rect(20, 20, 1024, 256);
+    private static int nextWindowId = 0;
+    private int WindowId { get; set; }
 
     // A list of random values to draw
     private List<float> values = new List<float>();
@@ -24,10 +27,12 @@ public class Graph : MonoBehaviour
     public bool showWindow0 = false;
 
     public int sourceAmount = 1;
-
+    public bool listener;
     // Start is called before the first frame update
     void Start()
     {
+        WindowId = nextWindowId;
+        nextWindowId++;
         mat = new Material(Shader.Find("Hidden/Internal-Colored"));
     }
 
@@ -48,7 +53,7 @@ public class Graph : MonoBehaviour
         {
             // Set out drawValue list equal to the values list 
             drawValues = values;
-            windowRect = GUI.Window(0, windowRect, DrawGraph, "");
+            windowRect = GUI.Window(WindowId, windowRect, DrawGraph, "");
         }
     }
 
@@ -79,16 +84,17 @@ public class Graph : MonoBehaviour
             GL.Begin(GL.LINES);
             GL.Color(Color.green);
 
-            int valueIndex = drawValues.Count - 1;
+            int valueIndex = VALUES.sampleSize - 1;
             for (int i = (int)windowRect.width - 4; i > 3; i--)
             {
                 float y1 = 0;
                 float y2 = 0;
                 if (valueIndex > 0)
                 {
-                    y2 = (drawValues[valueIndex] * windowRect.height / 2) / sourceAmount;
-                    y1 = (drawValues[valueIndex-1] * windowRect.height / 2) / sourceAmount;
+                    y2 = (drawValues[valueIndex] * windowRect.height / 2);
+                    y1 = (drawValues[valueIndex - 1] * windowRect.height / 2);
                 }
+
                 GL.Vertex3(i, windowRect.height / 2 + y2, 0);
                 GL.Vertex3((i - 1), windowRect.height / 2 + y1, 0);
                 valueIndex -= 1;

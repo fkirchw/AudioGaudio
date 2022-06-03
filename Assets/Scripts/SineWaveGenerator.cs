@@ -7,53 +7,65 @@ public class SineWaveGenerator : MonoBehaviour
     [Range(1, 20000)]  //Creates a slider in the inspector
     public float frequency1;
 
-    [Range(0.01f, 1)]
-    public float amplitude;
+    //[Range(0.01f, 1)]
+    public float initialAmplitude = 1;
     //[Range(1, 20000)]  //Creates a slider in the inspector
     //public float frequency2;
-
-    public float sampleRate = 44100;
-    public float waveLengthInSeconds = 2.0f;
-
-    AudioSource audioSource;
-    int timeIndex = 0;
-
-    void Start()
+    private float waveLengthInSeconds = 1;
+    internal float currentAmplitude;
+    internal float maxDistance
     {
-        audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 1; //force 2D sound
-        AnimationCurve curve = audioSource.GetCustomCurve(AudioSourceCurveType.SpatialBlend);
-        audioSource.Stop(); //avoids audiosource from starting to play automatically
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        get
         {
-            if (!audioSource.isPlaying)
+            if(audioSource == null)
             {
-                timeIndex = 0;  //resets timer before playing sound
-                audioSource.Play();
+                return 0;
             }
             else
             {
-                audioSource.Stop();
+                return audioSource.maxDistance;
             }
         }
     }
 
+    AudioSource audioSource;
+    Graph graph;
+    float[] farr = new float[1024];
+    private int ti = 0;
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        graph = this.GetComponentInChildren<Graph>();
+        currentAmplitude = initialAmplitude;
+        for (int i = 0; i < farr.Length; i += 1)
+        {
+            farr[i] = CreateSine(ti, frequency1, VALUES.sampleSize);
+            ti++;
+            if (ti >= (VALUES.sampleSize * waveLengthInSeconds))
+            {
+                ti = 0;
+            }
+        }
+    }
 
+    void Update()
+    {
+        if (graph.showWindow0)
+        {
+            graph.SetValues(farr);
+        }
+    }
 
     void OnAudioFilterRead(float[] data, int channels)
     {
         for (int i = 0; i < data.Length; i += 1)
         {
-            data[i] = CreateSine(timeIndex, frequency1, sampleRate);
-            timeIndex++;
-            if (timeIndex >= (sampleRate * waveLengthInSeconds))
+            farr[i] = data[i] = CreateSine(ti, frequency1, VALUES.sampleSize);
+            ti++;
+            if (ti >= (VALUES.sampleSize * waveLengthInSeconds))
             {
-                timeIndex = 0;
+                ti = 0;
             }
         }
     }
@@ -61,6 +73,6 @@ public class SineWaveGenerator : MonoBehaviour
     //Creates a sinewave
     public float CreateSine(int timeIndex, float frequency, float sampleRate)
     {
-        return Mathf.Sin(2 * Mathf.PI * timeIndex * frequency / sampleRate) * amplitude;
+        return Mathf.Sin(2 * Mathf.PI * timeIndex * frequency / sampleRate) * currentAmplitude;
     }
 }

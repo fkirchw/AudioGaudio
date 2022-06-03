@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7058147853774903619}
   - component: {fileID: 3996795753601835664}
   - component: {fileID: -513528718111070843}
-  - component: {fileID: -2619789515434926399}
   m_Layer: 0
   m_Name: AudioListener
   m_TagString: Untagged
@@ -95,35 +94,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427434904041971586}
   m_Enabled: 1
---- !u!114 &-2619789515434926399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 427434904041971586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fd9ebf1401392e4bbd47fea32f47642, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentBakedListener: {fileID: 0}
-  applyReverb: 0
-  reverbType: 0
-  useAllProbeBatches: 0
-  probeBatches: []
-  mTotalDataSize: 0
-  mProbeDataSizes: 
-  mIdentifier:
-    type: 0
-    variation: 0
-    endpointInfluence:
-      center:
-        x: 0
-        y: 0
-        z: 0
-      radius: 0
-  mProbeBatchesUsed: []
 --- !u!1001 &3568163849616002964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,3 +189,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showWindow0: 0
   sourceAmount: 1
+  listener: 0
